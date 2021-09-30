@@ -1,0 +1,9 @@
+<ng-container class= "emptyListText" *ngIf= "allItems.length === 0; else displayItems" >
+    <h1>To do list is currently empty. Please add new item.</h1>
+</ng-container>
+<ng-template #displayItems>
+    <ul class = "listItems" *ngFor= "let item of allItems">
+        <li class ="listItem" ><a [routerLink]="['/items',item.id]" [state]="{item:item}">{{item.title}}</a></li>
+    </ul>
+</ng-template>
+

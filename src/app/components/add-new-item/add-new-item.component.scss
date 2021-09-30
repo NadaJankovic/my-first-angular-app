@@ -1,0 +1,55 @@
+.input-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: max-content;
+    max-width:400px;
+    margin: auto;
+
+    .input {
+        height: 25px;
+        border-radius: 5px;
+        margin-top: 20vh;
+        margin-bottom: 15px;
+    }
+    .texarea {
+        max-height: max-content;
+        height:150px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        border:2px solid black;
+    }
+
+    .errorText {
+        font-size: 20px;
+        font-weight: 300;
+        text-align: center;
+        color: red;
+    }
+}
+.save-cancel-button-container {
+    display:flex;
+    justify-content:l;
+
+    .input-save-button {
+        background-color:black;
+        color:white;
+        height: 25px;
+        width: 100px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 5px;
+       
+     }
+     .cancel-button {
+        background-color:rgb(84, 102, 119);
+        color:white;
+        height: 25px;
+        width: 100px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 5px;
+     }
+
+
+}

@@ -1,0 +1,28 @@
+/* .nav-bar {
+    display: flex;
+    justify-content: space-around;
+    height: 10vh;
+    margin:0px;
+    li {
+        list-style-type: none;
+    }
+    a {
+        color:white;
+        text-decoration: none;
+    }
+} */
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color:black;
+    height: 10vh;
+    margin:0px;
+    li {
+        list-style-type: none;
+    }
+    a {
+        color:white;
+        text-decoration: none;
+    }
+}
