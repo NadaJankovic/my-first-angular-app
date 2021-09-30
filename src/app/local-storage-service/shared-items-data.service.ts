@@ -31,14 +31,16 @@ return this.itemList = this._storage.get(STORAGE_KEY) || [];
       })
       return this._storage.set(STORAGE_KEY, this.itemList);
     }
+    
 
     updateItem(title: string , content: string, id:string): any {
+ 
       this.itemList.push({
         title: title,
         content: content,
         id:id
       })
       return this._storage.set(STORAGE_KEY, this.itemList);
-    }
+  }
     
 }

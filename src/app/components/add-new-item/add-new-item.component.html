@@ -1,10 +1,10 @@
-<div class= "input-form-container" >
+<div  class= "input-form-container">
 <form (ngSubmit)="onSaveUpdateButtonClick(item.titleName, item.content, item.id)" class= "input-form"  >
     <input  name="titleName" [(ngModel)]= "item.titleName" placeholder =" Title" class="input" >
     <textarea  name="content" [(ngModel)]= "item.content" placeholder =" Content" class="texarea"></textarea>
     <div class = "save-cancel-button-container">
         <button  class="input-save-button">Save</button>
-        <button  class ="cancel-button">Cancel </button>
+        <button (click) ="returnToHomePage()" class ="cancel-button">Cancel </button>
     </div>
     <h5 class="errorText">{{errorText}}</h5>
 </form>
