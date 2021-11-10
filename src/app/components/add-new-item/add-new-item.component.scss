@@ -10,7 +10,6 @@
     .input {
         height: 25px;
         border-radius: 5px;
-        margin-top: 20vh;
         margin-bottom: 15px;
     }
     .texarea {
@@ -20,37 +19,83 @@
         margin-bottom: 15px;
         border:2px solid black;
     }
+}
 
-    .errorText {
-        font-size: 20px;
-        font-weight: 300;
-        text-align: center;
-        color: red;
+
+
+.example-wrap {
+    display: flex;
+    justify-content: center;
+    
+    .k-form-fieldset {
+      display: flex;
+      flex-direction: column;
+      min-width: 400px;
+      height: fit-content;
     }
+
+    .k-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 90vh;
+      min-width: max-content;
+      min-width:400px;
+      margin: auto;
+
+
+      .k-form-field{
+          margin: auto;
+         input {
+            display: flex;
+            height: 25px;
+            width: 250px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+           }
+
+          textarea {
+            display: flex;
+            max-height: max-content;
+            height:150px;
+            width: 250px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border:2px solid black;
+            }
+        }
+
+    
+        .save-cancel-button-container {
+            display:flex;
+            justify-content:flex-start;
+            margin-top: 30px;
+            margin-left: 60px;
+        
+            .input-save-button {
+                background-color:black;
+                color:white;
+                height: 25px;
+                width: 100px;
+                margin-left: 10px;
+                border: none;
+                border-radius: 5px;
+               
+            }
+            .cancel-button {
+                background-color:rgb(84, 102, 119);
+                color:white;
+                height: 25px;
+                width: 100px;
+                margin-left: 10px;
+                border: none;
+                border-radius: 5px;
+            }
+    
+        }
+   
+    }
+
+    
 }
-.save-cancel-button-container {
-    display:flex;
-    justify-content:l;
 
-    .input-save-button {
-        background-color:black;
-        color:white;
-        height: 25px;
-        width: 100px;
-        margin-left: 10px;
-        border: none;
-        border-radius: 5px;
-       
-     }
-     .cancel-button {
-        background-color:rgb(84, 102, 119);
-        color:white;
-        height: 25px;
-        width: 100px;
-        margin-left: 10px;
-        border: none;
-        border-radius: 5px;
-     }
-
-
-}

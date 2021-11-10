@@ -23,24 +23,31 @@ export class SharedItemsDataService {
 return this.itemList = this._storage.get(STORAGE_KEY) || [];
   }
 
-  addNewItem(title: string , content: string): any {
-      this.itemList.push({
-        title: title,
-        content: content,
-        id: Math.random().toString()
-      })
-      return this._storage.set(STORAGE_KEY, this.itemList);
-    }
-    
+  addNewItem(title: string, content: string): any {
+    this.itemList.push({
+      title: title,
+      content: content,
+      id: Math.random().toString()
+    })
+    return this._storage.set(STORAGE_KEY, this.itemList);
+  }
 
-    updateItem(title: string , content: string, id:string): any {
- 
-      this.itemList.push({
-        title: title,
-        content: content,
-        id:id
-      })
-      return this._storage.set(STORAGE_KEY, this.itemList);
+  editItem (title: string, content: string, id:string):any {
+    const item =this.itemList.map((el: { id: string; }) => el.id === id ?
+    {...el, title:title, content:content, id: id} :el);
+    return this._storage.set(STORAGE_KEY, item);
+  }
+
+  delete( id: string): any {
+   const deletedItem = this.itemList.filter((el: { id: string; }) => el.id !== id);
+  return this._storage.set(STORAGE_KEY, deletedItem);
+  }
+
+
+  getItemById(id: string): any {
+    const getAllItems = this._storage.get(STORAGE_KEY);
+   const getItem = getAllItems.filter((el: { id: any; }) => el.id == id);
+   return getItem;
   }
     
 }

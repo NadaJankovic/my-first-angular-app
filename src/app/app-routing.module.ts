@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   { path: 'addNewItem', component: AddNewItemComponent },
   { path: 'homePage', component: HomePageComponent },
+  { path: 'editItem/:itemId', component: AddNewItemComponent },
   { path: 'items/:itemId', component: ItemDetailsComponent },
   {path: '', redirectTo: '/homePage', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}

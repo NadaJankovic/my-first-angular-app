@@ -2,7 +2,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedItemsDataService } from 'src/app/local-storage-service/shared-items-data.service';
-import { Item} from '../models/item';
 
 @Component({
   selector: 'app-item-details',
@@ -11,14 +10,9 @@ import { Item} from '../models/item';
 })
 
 export class ItemDetailsComponent implements OnInit, OnChanges {
- item : Item={
-  titleName: window.history.state.item.title,
-  content:  window.history.state.item.content,
-  id: window.history.state.item.id
-};
+ item : any;
 
-  constructor( private _router : Router, 
-    private shared_Data_service: SharedItemsDataService) { 
+  constructor( private _router : Router) { 
   
   }
   ngOnChanges (changes: SimpleChanges) {
@@ -27,16 +21,17 @@ export class ItemDetailsComponent implements OnInit, OnChanges {
   }
  
   ngOnInit(): void {
+    this.item  ={
+        titleName: window.history.state.item.title,
+        content:  window.history.state.item.content,
+        id: window.history.state.item.id
+      };
+  
     console.log('details,on intit item', this.item )
   }
 
  public returnToHomePage (): void {
   this._router.navigateByUrl("/homePage", { skipLocationChange: false });
   }
-
-  public editItem(item: any): void {
-   this._router.navigate(['/addNewItem'], {state:{data:{item}}})
-  }
-
 
 }

@@ -1,11 +1,22 @@
-<div  class= "input-form-container">
-<form (ngSubmit)="onSaveUpdateButtonClick(item.titleName, item.content, item.id)" class= "input-form"  >
-    <input  name="titleName" [(ngModel)]= "item.titleName" placeholder =" Title" class="input" >
-    <textarea  name="content" [(ngModel)]= "item.content" placeholder =" Content" class="texarea"></textarea>
-    <div class = "save-cancel-button-container">
-        <button  class="input-save-button">Save</button>
-        <button (click) ="returnToHomePage()" class ="cancel-button">Cancel </button>
-    </div>
-    <h5 class="errorText">{{errorText}}</h5>
-</form>
+<div class="example-wrap">
+    <form class="k-form" [formGroup]="registerForm">
+        <fieldset class="k-form-fieldset">
+            <kendo-formfield>
+                <kendo-label [for]="title" text="Title"></kendo-label>
+                <input formControlName="title" kendoTextBox #title required />
+                <kendo-formerror> Title is required</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="content" text="Content"></kendo-label>
+                <textarea formControlName="content" kendoTextBox #content required></textarea>
+                <kendo-formerror> Contentis required</kendo-formerror>
+            </kendo-formfield>
+
+            <div class="save-cancel-button-container">
+                <button type="button" class="input-save-button " (click)="submitForm()">Submit</button>
+                <button class="cancel-button" (click)="clearForm()">Clear</button>
+            </div>
+        </fieldset>
+    </form>
 </div>

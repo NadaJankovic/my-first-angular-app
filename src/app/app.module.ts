@@ -11,7 +11,9 @@ import { CommonModule } from '@angular/common';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { SharedItemsDataService } from './local-storage-service/shared-items-data.service';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LabelModule } from "@progress/kendo-angular-label";
+import { InputsModule } from "@progress/kendo-angular-inputs";
 
 @NgModule({
   declarations: [
@@ -27,7 +29,11 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     CommonModule,
     StorageServiceModule,
-    FormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    LabelModule,
+    InputsModule,
+
   ],
   providers: [SharedItemsDataService ],
   bootstrap: [AppComponent]

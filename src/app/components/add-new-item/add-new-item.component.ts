@@ -1,7 +1,7 @@
-import { Component, OnInit} from '@angular/core';
-import {  Router } from '@angular/router';
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { SharedItemsDataService } from 'src/app/local-storage-service/shared-items-data.service';
-import { Item } from '../models/item'
 
 @Component({
   selector: 'app-add-new-item',
@@ -9,71 +9,57 @@ import { Item } from '../models/item'
   styleUrls: ['./add-new-item.component.scss']
 })
 
-export class AddNewItemComponent implements OnInit{
-  item: Item ;
-  errorText = '';
+export class AddNewItemComponent implements OnInit {
+
+  registerForm!: FormGroup;
 
   constructor(
+    private _fb: FormBuilder,
     private _router: Router,
+    private _route: ActivatedRoute,
     private shared_Data_service: SharedItemsDataService) {
-      this.item= {
-        titleName:'',
-        content:'',
-        id:''
-      }
+    this.registerForm = this._fb.group({
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2)]),
+      content: new FormControl('', [
+        Validators.required,
+        Validators.minLength(13)]),
+      id: new FormControl('')
+    })
 
   }
 
-  ngOnInit(): void { 
-      this.checkIfItemExists();
-  }
-
-  checkIfItemExists () : any {
-    if(history.state.data.item.id === undefined) {
-      return this.item= {
-        titleName:'',
-        content:'',
-        id:''
-       }
-
-    } 
-    return this.item= {
-      titleName:history.state.data.item.titleName,
-      content:history.state.data.item.content,
-      id:history.state.data.id
-     }
-  }
-
-  onSaveUpdateButtonClick(itemTitle: string, content : string, id:string): any {
-    if (itemTitle !== '' && content !== '' && !id) {
-      const titleMatch = this.shared_Data_service.getAllItems().filter(el => el.title === itemTitle).length;
-      const contentMatch = this.shared_Data_service.getAllItems().filter(el => el.content === content).length;
-
-      if (titleMatch === 0 || contentMatch === 0) {
-        this._router.navigateByUrl("/homePage", { skipLocationChange: false })
-        return this.shared_Data_service.addNewItem(itemTitle, content);
-      } else {
-        return this.errorText = 'Item with same titel or content already exsists.';
-      }
-
-    }
-    else if (itemTitle !== '' && content !== '' && id) {
-      const titleMatch = this.shared_Data_service.getAllItems().filter(el => el.title === itemTitle).length;
-      const contentMatch = this.shared_Data_service.getAllItems().filter(el => el.content === content).length;
-
-      if (titleMatch === 0 || contentMatch === 0) {
-        this._router.navigateByUrl("/homePage", { skipLocationChange: false })
-        return this.shared_Data_service.updateItem(itemTitle, content, id);
-      } else {
-        return this.errorText = 'Item with same titel or content already exsists.';
-      }
-    }
-    else {
-      return this.errorText = 'Input field cannot be empty.';
+  ngOnInit() {
+    if (!!history.state.id) {
+      this.prePopulateForm(history.state.id);
     }
   }
 
-  public returnToHomePage (): void {
+  public submitForm(): void {
+    this.returnToHomePage();
+    if (!!this.registerForm.value.id) {
+      return this.shared_Data_service.editItem(this.registerForm.value.title, this.registerForm.value.content, this.registerForm.value.id);
+    }
+    return this.shared_Data_service.addNewItem(this.registerForm.value.title, this.registerForm.value.content);
+  }
+
+  public prePopulateForm(id: string): void {
+    this.registerForm.markAllAsTouched();
+    const filteredItemById = this.shared_Data_service.getItemById(id);
+
+    this.registerForm.patchValue({
+      title: filteredItemById[0].title,
+      content: filteredItemById[0].content,
+      id: filteredItemById[0].id
+    });
+  }
+
+  public clearForm(): void {
+    this.registerForm.reset();
+  }
+
+  public returnToHomePage(): void {
     this._router.navigateByUrl("/homePage", { skipLocationChange: false });
-    }
+  }
 }

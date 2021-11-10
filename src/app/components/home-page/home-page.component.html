@@ -2,8 +2,13 @@
     <h1>To do list is currently empty. Please add new item.</h1>
 </ng-container>
 <ng-template #displayItems>
-    <ul class = "listItems" *ngFor= "let item of allItems">
-        <li class ="listItem" ><a [routerLink]="['/items',item.id]" [state]="{item:item}">{{item.title}}</a></li>
-    </ul>
-</ng-template>
-
+    <table  class = "listItems" *ngFor="let item of allItems; index as i"> 
+        <tr >
+            <td ><a [routerLink]="['/items',item.id]" [state]="{item:item}">{{item.title}}</a></td>
+        </tr>
+        <div class ="item-edit-delete-btns">
+            <button class="edit-btn" (click) = "editItem(item.id)">Edit</button>
+            <button  class="delete-btn"(click) = "deleteItem(item.id)">Delete</button>
+        </div>
+    </table>
+    </ng-template>
