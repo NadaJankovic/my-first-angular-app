@@ -1,7 +1,6 @@
 
-import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedItemsDataService } from 'src/app/local-storage-service/shared-items-data.service';
 
 @Component({
   selector: 'app-item-details',

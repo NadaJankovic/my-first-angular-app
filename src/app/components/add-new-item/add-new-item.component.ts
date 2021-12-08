@@ -1,7 +1,8 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { SharedItemsDataService } from 'src/app/local-storage-service/shared-items-data.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { SharedItemsDataService } from '../../local-storage-service/shared-items-data.service';
 
 @Component({
   selector: 'app-add-new-item',
@@ -9,30 +10,37 @@ import { SharedItemsDataService } from 'src/app/local-storage-service/shared-ite
   styleUrls: ['./add-new-item.component.scss']
 })
 
-export class AddNewItemComponent implements OnInit {
+export class AddNewItemComponent implements OnInit,OnDestroy {
+ public registerForm!: FormGroup;
+ public routeSub!: Subscription;
+ public paramId!: string;
 
-  registerForm!: FormGroup;
 
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
-    private _route: ActivatedRoute,
+    private route: ActivatedRoute,
     private shared_Data_service: SharedItemsDataService) {
-    this.registerForm = this._fb.group({
-      title: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2)]),
-      content: new FormControl('', [
-        Validators.required,
-        Validators.minLength(13)]),
-      id: new FormControl('')
-    })
-
+  }
+  ngOnDestroy(): void {
+    this.routeSub.unsubscribe();
   }
 
   ngOnInit() {
-    if (!!history.state.id) {
-      this.prePopulateForm(history.state.id);
+   this.routeSub= this.route.params.subscribe(params => {
+    this.paramId =params.itemId;
+    });
+    this.registerForm = this._fb.group({
+        title: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2)]),
+        content: new FormControl('', [
+          Validators.required,
+          Validators.minLength(5)]),
+        id: new FormControl('')
+      })
+    if (!!this.paramId) {
+      this.prePopulateForm(this.paramId);
     }
   }
 
@@ -43,7 +51,7 @@ export class AddNewItemComponent implements OnInit {
     }
     return this.shared_Data_service.addNewItem(this.registerForm.value.title, this.registerForm.value.content);
   }
-
+  
   public prePopulateForm(id: string): void {
     this.registerForm.markAllAsTouched();
     const filteredItemById = this.shared_Data_service.getItemById(id);
@@ -60,6 +68,7 @@ export class AddNewItemComponent implements OnInit {
   }
 
   public returnToHomePage(): void {
-    this._router.navigateByUrl("/homePage", { skipLocationChange: false });
+    this._router.navigateByUrl("/homePage",{ skipLocationChange: false });
   }
+ 
 }
