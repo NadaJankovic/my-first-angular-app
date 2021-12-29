@@ -1,11 +1,9 @@
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import { AddNewItemComponent } from './add-new-item.component';
 import { SharedItemsDataService } from '../../local-storage-service/shared-items-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, of } from 'rxjs';
-import { identifierModuleUrl } from '@angular/compiler';
-import { hasUncaughtExceptionCaptureCallback } from 'process';
-import { group } from 'console';
+import { of } from 'rxjs';
+
 
 // define the test suit
 describe('AddNewItemComponent', () => {
@@ -20,17 +18,14 @@ describe('AddNewItemComponent', () => {
     let storage: Storage;
     let spyOnPrepopulateForm: any;
     let spyOneditItem;
+    let spyOnGetItemById;
 
 
     beforeEach(() => {
+
         const paramsSubjectMock = of({
             itemId: '1'
         });
-        const formItemMock = {
-                title:'',
-                content: '',
-                id: ''
-        };
 
         activatedRoute = {
             params: paramsSubjectMock
@@ -38,23 +33,34 @@ describe('AddNewItemComponent', () => {
 
         service = {
             editItem: jest.fn(),
-            addNewItem: jest.fn()
+            addNewItem: jest.fn(),
+            getItemById:jest.fn()
         } as unknown as SharedItemsDataService;
 
         router = {
             navigateByUrl: jest.fn(),
         } as unknown as Router;
+
         //insantiate a component
         component = new AddNewItemComponent(fb, router, activatedRoute, service);
 
-        fb = {
-            group:jest.fn().mockImplementation(()=> formItemMock),
-        } as unknown as FormBuilder;
+        const formItemMock = group({
+            title: new FormControl('test', [
+                Validators.required,
+                Validators.minLength(2)]),
+            content: new FormControl('test contetst', [
+                Validators.required,
+                Validators.minLength(5)]),
+            id: new FormControl('1')
+        }) as unknown as FormBuilder;
 
-        form = fb as unknown as FormGroup;
+       form={
+        formItemMock
+       } as unknown as FormGroup
+
         //mock implementation added to demonstrate how mocked function can have implementation of our choice;
-        spyOnPrepopulateForm = jest.spyOn(component, 'prePopulateForm').mockImplementation(()=> 'prePopulateForm() called');
-        spyOneditItem = jest.spyOn(service,'editItem');
+        spyOnPrepopulateForm = jest.spyOn(component, 'prePopulateForm');
+        spyOneditItem = jest.spyOn(service, 'editItem');   
     });
 
     it('check result of subscription- id is sent via activated route', (done) => {
@@ -65,10 +71,9 @@ describe('AddNewItemComponent', () => {
     });
 
     it('should  prePopulateForm be called in ngOnInit', () => {
-         component.ngOnInit();
-         expect(component.paramId).toEqual('1');
-        expect(spyOnPrepopulateForm).toBeCalledWith('1');
-        expect(component.registerForm).toBeDefined();
+        spyOnGetItemById = jest.spyOn(service, 'getItemById');
+        service.getItemById('1');
+        expect(spyOnGetItemById).toBeCalledTimes(1);
     })
 
     it('returnToHomePage()', () => {
@@ -77,7 +82,7 @@ describe('AddNewItemComponent', () => {
         expect(spyOnRouterNavigate).toBeCalledWith("/homePage", { "skipLocationChange": false });
     })
 
-
+  
     // describe('pprepopulate/clear form', () => {
     //     
     //     let spyOnClearForm:any;
@@ -96,3 +101,4 @@ describe('AddNewItemComponent', () => {
     // });
    
 });
+

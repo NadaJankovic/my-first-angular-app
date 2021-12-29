@@ -3,13 +3,13 @@
         <fieldset class="k-form-fieldset">
             <kendo-formfield>
                 <kendo-label [for]="title" text="Title"></kendo-label>
-                <input formControlName="title" kendoTextBox #title required />
+                <input id ='title' formControlName="title" kendoTextBox #title required />
                 <kendo-formerror> Title is required</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
                 <kendo-label [for]="content" text="Content"></kendo-label>
-                <textarea formControlName="content" kendoTextBox #content required></textarea>
+                <textarea id ='content' formControlName="content" kendoTextBox #content required></textarea>
                 <kendo-formerror> Contentis required</kendo-formerror>
             </kendo-formfield>
 

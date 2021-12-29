@@ -53,7 +53,7 @@ export class AddNewItemComponent implements OnInit,OnDestroy {
   }
   
   public prePopulateForm(id: string): void {
-    this.registerForm.markAllAsTouched();
+   this.registerForm.markAllAsTouched();
     const filteredItemById = this.shared_Data_service.getItemById(id);
 
     this.registerForm.patchValue({

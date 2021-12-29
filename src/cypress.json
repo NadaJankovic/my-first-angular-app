@@ -1,0 +1,11 @@
+{
+    "$schema": "https://on.cypress.io/cypress.schema.json",
+    "downloadsFolder": "cypress/downloads",
+    "fixturesFolder": "cypress/fixtures",
+    "integrationFolder": "cypress/integration",
+    "pluginsFile":"cypress/plugins",
+    "screenshotsFolder":"cypress/screenshots",
+    "videosFolder":"cypress/videos",
+    "supportFile":"cypress/support",
+    "baseUrl": "http://localhost:4200"
+}
