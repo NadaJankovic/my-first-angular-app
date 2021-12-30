@@ -13,7 +13,7 @@ import { SharedItemsDataService } from '../../local-storage-service/shared-items
 export class AddNewItemComponent implements OnInit,OnDestroy {
  public registerForm!: FormGroup;
  public routeSub!: Subscription;
- public paramId!: string;
+ public paramId!: string; 
 
   constructor(
     private _fb: FormBuilder,
