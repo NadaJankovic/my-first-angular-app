@@ -15,6 +15,9 @@ export class AddNewItemComponent implements OnInit,OnDestroy {
  public routeSub!: Subscription;
  public paramId!: string;
 
+get invalidForm ():boolean {
+return !this.registerForm.controls.title.errors && !this.registerForm.controls.content.errors;
+}
 
   constructor(
     private _fb: FormBuilder,
@@ -22,6 +25,7 @@ export class AddNewItemComponent implements OnInit,OnDestroy {
     private route: ActivatedRoute,
     private shared_Data_service: SharedItemsDataService) {
   }
+
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
   }
@@ -33,7 +37,8 @@ export class AddNewItemComponent implements OnInit,OnDestroy {
     this.registerForm = this._fb.group({
         title: new FormControl('', [
           Validators.required,
-          Validators.minLength(2)]),
+          Validators.minLength(2)],
+          ),
         content: new FormControl('', [
           Validators.required,
           Validators.minLength(5)]),
@@ -45,11 +50,13 @@ export class AddNewItemComponent implements OnInit,OnDestroy {
   }
 
   public submitForm(): void {
+    if(this.registerForm.valid) {
     this.returnToHomePage();
     if (!!this.registerForm.value.id) {
       return this.shared_Data_service.editItem(this.registerForm.value.title, this.registerForm.value.content, this.registerForm.value.id);
     }
     return this.shared_Data_service.addNewItem(this.registerForm.value.title, this.registerForm.value.content);
+  }
   }
   
   public prePopulateForm(id: string): void {
