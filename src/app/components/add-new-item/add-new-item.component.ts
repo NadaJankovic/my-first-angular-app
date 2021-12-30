@@ -15,10 +15,6 @@ export class AddNewItemComponent implements OnInit,OnDestroy {
  public routeSub!: Subscription;
  public paramId!: string;
 
-get invalidForm ():boolean {
-return !this.registerForm.controls.title.errors && !this.registerForm.controls.content.errors;
-}
-
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
