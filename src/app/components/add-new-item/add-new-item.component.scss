@@ -1,37 +1,16 @@
-.input-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 90vh;
-    min-width: max-content;
-    max-width:400px;
-    margin: auto;
 
-    .input {
-        height: 25px;
-        border-radius: 5px;
-        margin-bottom: 15px;
-    }
-    .texarea {
-        max-height: max-content;
-        height:150px;
-        border-radius: 5px;
-        margin-bottom: 15px;
-        border:2px solid black;
-    }
-}
-
-
-
-.example-wrap {
+.form-container {
     display: flex;
     justify-content: center;
+    padding-top: 15px;
     
     .k-form-fieldset {
       display: flex;
       flex-direction: column;
       min-width: 400px;
       height: fit-content;
+      border: 2px solid rgb(84, 102, 119);
+      border-radius: 8px;
     }
 
     .k-form {
@@ -44,8 +23,9 @@
       margin: auto;
 
 
-      .k-form-field{
+      .k-form-field{ 
           margin: auto;
+          padding: 15px 0px 0px 0px;
          input {
             display: flex;
             height: 25px;
@@ -53,7 +33,7 @@
             border-radius: 5px;
             margin-bottom: 15px;
            }
-
+    
           textarea {
             display: flex;
             max-height: max-content;
@@ -71,6 +51,7 @@
             justify-content:flex-start;
             margin-top: 30px;
             margin-left: 60px;
+            margin-bottom: 20px;
         
             .input-save-button {
                 background-color:black;
@@ -82,7 +63,7 @@
                 border-radius: 5px;
                
             }
-            .cancel-button {
+            .return-button {
                 background-color:rgb(84, 102, 119);
                 color:white;
                 height: 25px;

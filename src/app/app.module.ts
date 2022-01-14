@@ -14,6 +14,7 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LabelModule } from "@progress/kendo-angular-label";
 import { InputsModule } from "@progress/kendo-angular-inputs";
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
     FormsModule,
     LabelModule,
     InputsModule,
-
+    ButtonsModule
   ],
   providers: [SharedItemsDataService ],
   bootstrap: [AppComponent]

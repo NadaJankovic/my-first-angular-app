@@ -1,14 +1,25 @@
-<div class="example-wrap">
+<div class="form-container">
     <form class="k-form" [formGroup]="registerForm">
         <fieldset class="k-form-fieldset">
             <kendo-formfield >
-                <kendo-label [for]="title" text="Title"></kendo-label>
-                <input id ='title' formControlName="title" kendoTextBox #title required />
-                <kendo-formerror> Title and Content required</kendo-formerror>
+                <kendo-label [for]="title"
+                 text="Title">
+                </kendo-label>
+                <input id ='title' 
+                formControlName="title"
+                 kendoTextBox
+                 autofocus
+                  #title
+                   required />
+                <kendo-formerror> Title and Content required
+                </kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
-                <kendo-label [for]="content" text="Content"></kendo-label>
+                <kendo-label 
+                [for]="content"
+                 text="Content">
+                </kendo-label>
                 <textarea  
                  id ='content'
                   formControlName="content" 
@@ -20,10 +31,15 @@
 
             <div class="save-cancel-button-container">
                 <button type="button"
-                 class="input-save-button"
-                  (click)="submitForm()" status
-                 >Submit</button>
-                <button class="cancel-button" (click)="returnToHomePage()">Return</button>
+                  kendoButton [primary]="true"
+                  class="input-save-button"
+                  (click)="submitForm()" status>
+                  Submit
+                </button>
+                <button class="return-button"
+                 (click)="returnToHomePage()">
+                 Return
+                </button>
             </div>
         </fieldset>
     </form>

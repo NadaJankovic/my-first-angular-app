@@ -1,7 +1,5 @@
 /// <reference types="cypress"/>
 
-const { get } = require("http");
-
 
 describe('AddNewItem', ()=> {
     beforeEach (()=> {
