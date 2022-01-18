@@ -1,9 +1,6 @@
 /// <reference types="cypress"/>
 
-const { url } = require("inspector");
-
-
-describe('Testing while on Home Pge', () => {
+describe('Testing while on Home Page', () => {
   beforeEach(() => {
     cy.visit('/homePage');
   });
@@ -13,13 +10,13 @@ describe('Testing while on Home Pge', () => {
       .should('contain.text', 'To do list is currently empty. Please add new item.');
   });
 
-  it('should find  Home Page anchor tag  and click on it', () => {
+  it('should find Home Page anchor tag  and click on it', () => {
     cy.get(':nth-child(1) > a')
       .click()
       .should('contain.text', 'Home Page')
       .should('not.contain.text', 'Add New List Item')
       .url().should('include', '/homePage')
-      .url().should('eq', 'http://localhost:4200/homePage')
+      .url().should('eq', 'http://localhost:4200/homePage');
   });
 
   it('should find Add New List Item  anchor tag  and click on it', () => {
@@ -28,11 +25,11 @@ describe('Testing while on Home Pge', () => {
       .should('be.visible')
       .should('contain.text', 'Add New List Item')
       .url().should('include', '/addNewItem')
-      .url().should('eq', 'http://localhost:4200/addNewItem')
+      .url().should('eq', 'http://localhost:4200/addNewItem');
   });
-});
+})
 
-describe('Testing while on Add New List item', () => {
+describe(' Add New List item', () => {
   beforeEach(() => {
     cy.visit('/addNewItem')
       .get('kendo-formfield')
@@ -43,23 +40,57 @@ describe('Testing while on Add New List item', () => {
       .get('kendo-formfield')
       .find('#content')
       .type('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
-      .should('include.value', 'Lorem ipsum dolor sit amet')
+      .should('include.value', 'Lorem ipsum dolor sit amet');
   });
-  it('should type in title and content and click return button', () => {
-    cy
-      .get('.return-button')
+  it('after form is filled, click return button', () => {
+    cy.get('.return-button')
       .should('have.class', 'return-button')
       .click()
-      .url().should('eq', 'http://localhost:4200/homePage')
+      .url()
+      .should('eq', 'http://localhost:4200/homePage');
   });
 
-  it('should type title and content and click submit button', () => {
+  it('after form is filled, click submit button', () => {
     cy.get('.input-save-button')
       .focus()
       .should('have.class', 'input-save-button')
       .should('be.focused')
       .click()
-      .url().should('include', '/homePage')
+      .url()
+      .should('include', '/homePage')
+      .get('table>tr').eq(0)
+      .should('have.length', 1)
+      .should('contain.html', 'td')
+      .get('td > a')
+      .should('contain.text', 'Title')
+  });
+
+  it('form submission not possible if title input is empty', () => {
+    cy.get('kendo-formfield')
+      .find('#title')
+      .clear()
+
+      .get('.input-save-button')
+      .should('contain.text', 'Submit')
+      .click()
+      .should('have.css', 'box-shadow', 'rgba(255, 99, 88, 0.3) 0px 0px 0px 2px')
+      .url()
+      .should('not.include', '/homePage')
+      .should('include', '/addNewItem');
+  });
+
+  it('form submission not possible if content textarea is empty', () => {
+    cy.get('kendo-formfield')
+      .find('#content')
+      .clear()
+
+      .get('.input-save-button')
+      .should('contain.text', 'Submit')
+      .click()
+      .should('have.css', 'box-shadow', 'rgba(255, 99, 88, 0.3) 0px 0px 0px 2px')
+      .url()
+      .should('not.include', '/homePage')
+      .should('include', '/addNewItem');
   });
 
   describe('After form submission', () => {
@@ -69,7 +100,8 @@ describe('Testing while on Add New List item', () => {
         .should('have.class', 'input-save-button')
         .should('be.focused')
         .click()
-        .url().should('include', '/homePage')
+        .url()
+        .should('include', '/homePage');
     });
 
     it('should find first item in the list and click on it and click on Return button when item details is opened ', () => {
@@ -85,7 +117,8 @@ describe('Testing while on Add New List item', () => {
         .get('button')
         .should('include.text', 'Return')
         .click()
-        .url().should('include', '/homePage')
+        .url()
+        .should('include', '/homePage');
     });
 
     it('should find and delete first item in the list', () => {
@@ -95,9 +128,10 @@ describe('Testing while on Add New List item', () => {
         .should('be.focused')
         .wait(2000)
         .click()
-        .url().should('include', '/homePage')
+        .url()
+        .should('include', '/homePage')
         .get('h1')
-        .should('include.text', 'To do list is currently empty')
+        .should('include.text', 'To do list is currently empty');
     });
 
     it('should find and edit first item in the list then cick on return button', () => {
@@ -118,7 +152,7 @@ describe('Testing while on Add New List item', () => {
         .should('contain.text', 'Title and Content required')
         .get('#kendo-error-3')
         .should('not.exist')
-        
+
         .get('kendo-formfield')
         .find('#title')
         .type('New Title')
@@ -139,7 +173,7 @@ describe('Testing while on Add New List item', () => {
         .should('contain.text', 'Return')
         .click()
         .url()
-        .should('include', '/homePage')
+        .should('include', '/homePage');
     });
 
     it('should find and edit first item in the list then cick on submit button', () => {
@@ -169,7 +203,51 @@ describe('Testing while on Add New List item', () => {
         .should('include', '/homePage')
 
         .get('table>tr').eq(0)
-        .should('contain.text', 'New Title')
+        .should('contain.text', 'New Title');
+    });
+
+    it('form submission not possible if title input is empty', () => {
+      cy.get('.edit-btn')
+        .should('include.text', 'Edit')
+        .focus()
+        .should('be.focused')
+        .click()
+        .url()
+        .should('include', '/editItem')
+
+        .get('kendo-formfield')
+        .find('#title')
+        .clear()
+
+        .get('.input-save-button')
+        .should('contain.text', 'Submit')
+        .click()
+        .should('have.css', 'box-shadow', 'rgba(255, 99, 88, 0.3) 0px 0px 0px 2px')
+        .url()
+        .should('not.include', '/homePage')
+        .should('include', '/editItem');
+    });
+
+    it('form submission not possible if content input is empty', () => {
+      cy.get('.edit-btn')
+        .should('include.text', 'Edit')
+        .focus()
+        .should('be.focused')
+        .click()
+        .url()
+        .should('include', '/editItem')
+
+        .get('kendo-formfield')
+        .find('#content')
+        .clear()
+
+        .get('.input-save-button')
+        .should('contain.text', 'Submit')
+        .click()
+        .should('have.css', 'box-shadow', 'rgba(255, 99, 88, 0.3) 0px 0px 0px 2px')
+        .url()
+        .should('not.include', '/homePage')
+        .should('include', '/editItem');
     });
   });
 });

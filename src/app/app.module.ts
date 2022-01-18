@@ -16,6 +16,7 @@ import { LabelModule } from "@progress/kendo-angular-label";
 import { InputsModule } from "@progress/kendo-angular-inputs";
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
+
 @NgModule({
   declarations: [
     AppComponent,

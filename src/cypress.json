@@ -7,5 +7,6 @@
     "screenshotsFolder":"cypress/screenshots",
     "videosFolder":"cypress/videos",
     "supportFile":"cypress/support",
-    "baseUrl": "http://localhost:4200"
+    "baseUrl": "http://localhost:4200",
+    "testFiles": "**/*.{feature,features}"
 }
