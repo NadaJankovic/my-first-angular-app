@@ -1,0 +1,44 @@
+<div class="form-container">
+    <form class="k-form" [formGroup]="registerForm">
+        <fieldset class="k-form-fieldset">
+            <kendo-formfield >
+                <kendo-label [for]="user"
+                 text="User">
+                </kendo-label>
+                <input id ='user' 
+                formControlName="user"
+                 kendoTextBox
+                 autofocus
+                  #user
+                   required />
+                <kendo-formerror> User Name Required
+                </kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="password"
+                text="Password">
+               </kendo-label>
+               <input id ='password' 
+               formControlName="password"
+                kendoTextBox
+                autofocus
+                 #password
+                  required />
+               <kendo-formerror> Password Required
+               </kendo-formerror>
+           </kendo-formfield>
+
+            <div class="save-cancel-button-container">
+                <button type="button"
+                  kendoButton [primary]="true"
+                  class="input-save-button"
+                  status
+                  (click)= "login()">
+                Login
+                </button>
+
+            </div>
+        </fieldset>
+    </form>
+</div>

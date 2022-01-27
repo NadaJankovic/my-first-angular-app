@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddNewItemComponent } from './components/add-new-item/add-new-item.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: 'addNewItem', component: AddNewItemComponent },
-  { path: 'homePage', component: HomePageComponent },
-  { path: 'editItem/:itemId', component: AddNewItemComponent },
-  { path: 'items/:itemId', component: ItemDetailsComponent },
-  {path: '', redirectTo: '/homePage', pathMatch: 'full'},
-  {path: '**', component: PageNotFoundComponent}
+  {path: 'login', component: LoginComponent},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'protected', loadChildren: () => 
+  import('./feature-modules/internal-components/internal.module')
+  .then(m=> m.InternalModule)},
+  {path: '**', component: PageNotFoundComponent},
+ 
 ];
 
 @NgModule({
