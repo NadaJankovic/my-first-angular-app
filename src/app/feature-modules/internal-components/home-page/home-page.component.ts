@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,  Router } from '@angular/router';
-import {  SharedItemsDataService } from '../../../local-storage-service/shared-items-data.service';
+import {  SharedItemsDataService } from '../../../services/local-storage-service/shared-items-data.service';
 
 @Component({
   selector: 'app-home-page',

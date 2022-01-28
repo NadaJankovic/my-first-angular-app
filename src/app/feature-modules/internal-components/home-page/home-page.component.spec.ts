@@ -1,5 +1,5 @@
 import { HomePageComponent } from './home-page.component';
-import { SharedItemsDataService } from 'src/app/local-storage-service/shared-items-data.service';
+import { SharedItemsDataService } from 'src/app/services/local-storage-service/shared-items-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 describe('HomePageComponent', () => {

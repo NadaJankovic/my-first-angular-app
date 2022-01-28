@@ -1,6 +1,6 @@
 import { FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import { AddNewItemComponent } from './add-new-item.component';
-import { SharedItemsDataService } from '../../../local-storage-service/shared-items-data.service';
+import { SharedItemsDataService } from '../../../services/local-storage-service/shared-items-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 

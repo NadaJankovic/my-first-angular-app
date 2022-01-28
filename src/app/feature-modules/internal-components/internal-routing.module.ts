@@ -6,7 +6,7 @@ import { ItemDetailsComponent } from './item-details/item-details.component';
 
 const childrenRouts: Routes = [
   { path: 'homePage', component: HomePageComponent },
-  {path:'', redirectTo:'/protected/homePage', pathMatch: 'full'},
+  { path: '', redirectTo: '/protected/homePage', pathMatch: 'full' },
   { path: 'addNewItem', component: AddNewItemComponent },
   { path: 'editItem/:itemId', component: AddNewItemComponent },
   { path: 'items/:itemId', component: ItemDetailsComponent },

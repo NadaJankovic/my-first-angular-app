@@ -2,7 +2,7 @@ import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { SharedItemsDataService } from '../../../local-storage-service/shared-items-data.service';
+import { SharedItemsDataService } from 'src/app/services/local-storage-service/shared-items-data.service'; 
 
 @Component({
   selector: 'add-new-item',
