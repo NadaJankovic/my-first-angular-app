@@ -1,0 +1,85 @@
+<div class="form-container">
+    <form class="k-form" [formGroup]="registerForm">
+        <fieldset class="k-form-fieldset">
+            <h1 class = "formsLabel">Register</h1>
+            <kendo-formfield >
+                <kendo-label [for]="user"
+                 text="User">
+                </kendo-label>
+                <input id ='user' 
+                formControlName="user"
+                 kendoTextBox
+                 autofocus
+                  #user
+                   required />
+                <kendo-formerror> User Name Required
+                </kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield >
+                <kendo-label [for]="email"
+                 text="Email">
+                </kendo-label>
+                <input 
+                id ='email' 
+                type="email"
+                formControlName="email"
+                 kendoTextBox
+                 autofocus
+                  #email
+                   required />
+                <kendo-formerror> Please Enter Valid Email
+                </kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="password"
+                text="Password">
+               </kendo-label>
+               <input
+               type="password"
+                id ='password' 
+               formControlName="password"
+                kendoTextBox
+                autofocus
+                 #password
+                  required />
+               <kendo-formerror> Password Min 5 Characters
+               </kendo-formerror>
+           </kendo-formfield>
+
+           <kendo-formfield>
+            <kendo-label [for]="confirmPassword"
+            text="Confirm Password">
+           </kendo-label>
+           <input
+           type="password"
+            id ='confirmPassword' 
+           formControlName="confirmPassword"
+            kendoTextBox
+            autofocus
+             #confirmPassword
+              required />
+           <kendo-formerror> Password  and Confirm Password must match</kendo-formerror>
+       </kendo-formfield>
+       <div *ngIf = "userAlreadyExists">User with this User Name or Email Already Exists.</div>
+
+           <div class="save-cancel-button-container">
+            <button type="button"
+              kendoButton [primary]="true"
+              class="primary-button"
+              [disabled] ="!registerForm.valid"
+              (click)="submit()"
+              >
+              Submit
+            </button>
+            <button class="return-button"
+            (click)= "return()"
+            >
+             Return
+            </button>
+        </div>
+     
+        </fieldset>
+    </form>
+</div>

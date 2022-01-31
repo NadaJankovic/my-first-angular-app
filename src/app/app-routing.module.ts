@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/authentication/auth.guard';
 import { LoginComponent } from './public-components/login/login.component';
 import { PageNotFoundComponent } from './public-components/page-not-found/page-not-found.component'; 
+import { RegistrationComponent } from './public-components/registration/registration.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path:'registration', component: RegistrationComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'protected', loadChildren: () => 
   import('./feature-modules/internal-components/internal.module')

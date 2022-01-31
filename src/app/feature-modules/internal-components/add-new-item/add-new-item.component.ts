@@ -46,6 +46,7 @@ export class AddNewItemComponent implements OnInit,OnDestroy {
   }
 
   public submitForm(): void {
+    this.registerForm.markAllAsTouched();
     if(this.registerForm.valid) {
     this.returnToHomePage();
     if (!!this.registerForm.value.id) {

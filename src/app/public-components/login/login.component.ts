@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/authentication/auth-service/auth.service';
 
 @Component({
@@ -17,14 +17,25 @@ export class LoginComponent implements OnInit {
   ) {  
   }
 
-  login () {
-    const auth = this._auth.getUserNameAndPassword(this.registerForm.value.user, this.registerForm.value.password);
-    if(auth) {
-      this._router.navigateByUrl("/protected/homePage");
+  login() {
+    this.registerForm.markAllAsTouched();
+    if (!this.registerForm.valid) {
+      this._router.navigateByUrl("/login");
     }
+    this._auth.login(this.registerForm.value.user, this.registerForm.value.password).subscribe(
+      (result) => {
+        this._router.navigateByUrl("/protected/homePage");
+      }, (err: Error) => {
+        alert(err.message);
+      });
+
   }
 
   ngOnInit(): void {
+ console.log(this._auth.checkIfLoggedIn());
+ if(this._auth.checkIfLoggedIn()) {
+  this._router.navigateByUrl('/protected/homePage')
+ }
     this.registerForm = this._fb.group({
       user: new FormControl('', [
         Validators.required,

@@ -12,11 +12,13 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { LoginComponent } from './public-components/login/login.component';
 import { InternalModule } from './feature-modules/internal-components/internal.module';
 import { PageNotFoundComponent } from './public-components/page-not-found/page-not-found.component';
+import { RegistrationComponent } from './public-components/registration/registration.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

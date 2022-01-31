@@ -1,4 +1,3 @@
-<app-nav-bar></app-nav-bar>
 <div class="form-container">
     <form class="k-form" [formGroup]="registerForm">
         <fieldset class="k-form-fieldset">
@@ -33,7 +32,8 @@
             <div class="save-cancel-button-container">
                 <button type="button"
                   kendoButton [primary]="true"
-                  class="input-save-button"
+                  class="primary-button"
+                  [disabled] ="!registerForm.valid"
                   (click)="submitForm()">
                   Submit
                 </button>

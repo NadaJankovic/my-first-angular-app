@@ -12,6 +12,7 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { SharedItemsDataService } from 'src/app/services/local-storage-service/shared-items-data.service';
+import { InternalComponentComponent } from './internal-container/internal-component/internal-component.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SharedItemsDataService } from 'src/app/services/local-storage-service/s
     HomePageComponent,
     AddNewItemComponent,
     NavBarComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    InternalComponentComponent
   ],
   imports: [
     CommonModule,

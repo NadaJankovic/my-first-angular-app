@@ -15,10 +15,12 @@ constructor( private _auth :AuthService,
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this._auth.authStatus) {
-      return this._router.navigateByUrl('login');
+    if (!this._auth.checkIfLoggedIn()) {
+       this._router.navigateByUrl('/login');
+       return false;
     }
-    return this._auth.authStatus;
+   return this._auth.checkIfLoggedIn();
+  
   }
 
 }

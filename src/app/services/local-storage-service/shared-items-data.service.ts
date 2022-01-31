@@ -3,6 +3,7 @@ import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 
 const STORAGE_KEY = 'to-do-list';
+const USERS_KEY = 'users';
 
 /* export interface Item {
   title: string;
@@ -13,10 +14,12 @@ const STORAGE_KEY = 'to-do-list';
 })
 export class SharedItemsDataService {
   itemList: any;
+  users: any;
 
 
   constructor(@Inject(LOCAL_STORAGE) private _storage: StorageService) {
     this.itemList = [];
+    this.users = [];
    };
 
  public getAllItems (): any[] {
@@ -49,5 +52,20 @@ return this.itemList = this._storage.get(STORAGE_KEY) || [];
    const getItem = getAllItems.filter((el: { id: any; }) => el.id == id);
    return getItem;
   }
+
+  getUsers():any[]{
+    return this.users = this._storage.get(USERS_KEY) || [];
+  }
+
+  saveUser(userName: string, email: string, password: string, loggedIn:boolean): void {
+    this.users.push({
+      user: userName,
+      email: email,
+      password: password,
+      loggedIn:loggedIn
+    })
+    this._storage.set(USERS_KEY, this.users);
+ 
+}
     
 }

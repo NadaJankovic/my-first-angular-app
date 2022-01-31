@@ -1,6 +1,7 @@
 <div class="form-container">
-    <form class="k-form" [formGroup]="registerForm">
+    <form class="k-form" [formGroup]="registerForm" >
         <fieldset class="k-form-fieldset">
+            <h1 class = "formsLabel">Login</h1>
             <kendo-formfield >
                 <kendo-label [for]="user"
                  text="User">
@@ -33,13 +34,16 @@
 
             <div class="save-cancel-button-container">
                 <button type="button"
-                  kendoButton [primary]="true"
-                  class="input-save-button"
-                  status
-                  (click)= "login()">
-                Login
+                   class="primary-button login"
+                   kendoButton [primary]="true"
+                   [disabled] ="!registerForm.valid"
+                   (click)= "login()">
+                     Login
                 </button>
-
+            </div>
+            <div class = "registrationLink">
+                Not Registered? /
+                <a  routerLink = "/registration">Create An Account</a>
             </div>
         </fieldset>
     </form>

@@ -1,10 +1,11 @@
 <ul class ="nav-bar">
-    <li><a  routerLink="/protected/homePage" >Home Page</a></li>
+    <li><a  routerLink="/protected/homePage" routerLinkActive="active">Home Page</a></li>
     <li><a  routerLink="/protected/addNewItem" routerLinkActive="active">Add New List Item</a></li>
-    <li> <button type="button"
-         class ="input-save-button"
-         fillMode="outline"
-         [primary] = "true"
+    <li>  <div class="save-cancel-button-container">
+        <button type="button"
+        kendoButton
+         class ="primary-button logout"
          (click) = "logout()"
-        kendoButton >Logout</button></li>
+           >Logout</button>
+    </div></li>
 </ul>

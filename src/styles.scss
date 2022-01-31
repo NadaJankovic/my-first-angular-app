@@ -1,5 +1,5 @@
 @import "~@progress/kendo-theme-default/dist/all.scss";
-$secondary-color: rgb(224, 167, 92);
+$primary-color: #e0a75c;
 .input-form-container {
     width:50vw;
     height: 100%;
@@ -13,15 +13,27 @@ $secondary-color: rgb(224, 167, 92);
     margin-left: 60px;
     margin-bottom: 20px;
 
-    .input-save-button {
+    .primary-button {
+        background-color: $primary-color;
         color:white;
         height: 25px;
         width: 100px;
         margin-left: 10px;
         border: none;
         border-radius: 5px;
-       
+        }
+       .primary-button.logout {
+            border-radius: 5px;
+            border: 1px solid rgb(146, 102, 70);
+            color: $primary-color;
+            background-color: white;  
     }
+
+    .primary-button.login {
+        width: 250px;
+        margin-left: 14px;
+    }
+    
     .return-button {
         background-color:rgb(84, 102, 119);
         color:white;
@@ -31,4 +43,69 @@ $secondary-color: rgb(224, 167, 92);
         border: none;
         border-radius: 5px;
     }
+}
+.formsLabel {
+    display: flex;
+    justify-content: center;
+    color: $primary-color;
+}
+
+.registrationLink {
+    font-size: 16px;
+    margin: auto;
+    margin-bottom: 20px;
+    a {
+        color: $primary-color;
+        text-decoration: none;
+    }
+}
+.form-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+    
+    .k-form-fieldset {
+      display: flex;
+      flex-direction: column;
+      min-width: 400px;
+      height: fit-content;
+      border: 2px solid rgb(84, 102, 119);
+      border-radius: 8px;
+    }
+
+    .k-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 90vh;
+      min-width: max-content;
+      min-width:400px;
+      margin: auto;
+
+
+      .k-form-field{ 
+          margin: auto;
+          padding: 15px 0px 0px 0px;
+         input {
+            display: flex;
+            height: 25px;
+            width: 250px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+           }
+    
+          textarea {
+            display: flex;
+            max-height: max-content;
+            height:150px;
+            width: 250px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border:2px solid black;
+            }
+    
+        }
+   
+    }
+ 
 }

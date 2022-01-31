@@ -1,4 +1,3 @@
-<app-nav-bar></app-nav-bar>
 <ng-container class= "emptyListText" *ngIf= "allItems.length === 0; else displayItems" >
     <h1>To do list is currently empty. Please add new item.</h1>
 </ng-container>
@@ -7,9 +6,9 @@
         <tr >
             <td ><a [routerLink]="['/protected/items',item.id]" [state]="{item:item}">{{item.title}}</a></td>
         </tr>
-        <div class ="item-edit-delete-btns">
-            <button class="edit-btn" (click) = "editItem(item.id)">Edit</button>
-            <button  class="delete-btn"(click) = "deleteItem(item.id)">Delete</button>
+        <div class ="save-cancel-button-container">
+            <button class="primary-button" (click) = "editItem(item.id)">Edit</button>
+            <button  class="return-button"(click) = "deleteItem(item.id)">Delete</button>
         </div>
     </table>
     </ng-template>
